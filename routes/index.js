@@ -11,7 +11,6 @@ var SuicidesFilter = require('../models/suicidesfilter')
 var albania = {}
 
 router.get('/', function(req, res, next) {
-
   res.render('index', { title: 'Express' ,layout:'layouts/index-layout'});
 });
 

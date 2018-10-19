@@ -16,7 +16,9 @@ var addDataRouter = require('./routes/adddata');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/gis');
+//mongoose.connect('mongodb://localhost:27017/gis');
+
+mongoose.connect('mongodb://hrishikeshpaul:Keshpaul1996@ds135993.mlab.com:35993/heroku_0vm171db');
 
 // view engine setup
 app.engine('.hbs',expressHbs({extname:'.hbs'}));
