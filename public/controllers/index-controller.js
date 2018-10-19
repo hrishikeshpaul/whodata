@@ -4,11 +4,11 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
     $scope.gj = []
     $http.get('/countryData').then(function(response) {
         $scope.allData = response;
-        $scope.mymap = L.map('mapid').setView([-5.688, 35.43], 2);
+        $scope.mymap = L.map('mapid').setView([-2.688, 4.43], 2);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 25,
-            minZoom: 1,
+            maxZoom: 5,
+            minZoom: 2,
             id: 'mapbox.light',
             accessToken: 'pk.eyJ1IjoiaHJpc2hpa2VzaHBhdWwiLCJhIjoiY2puYmhpcDZ4MDQwZTNwcGUzc2czN2J4ZyJ9.IbxCwKm3S1BR9SOGwW5waA'
         }).addTo($scope.mymap);
@@ -41,6 +41,12 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
                         },
                         onEachFeature: function(feature, layer) {
                             layer.bindPopup('<b>Country: </b>' + files.country + '</br><b>Year: </b>' + files.year + '</br> <b>Total Suicides: </b> ' + files.suicides_no);
+                            layer.on('mouseover', function(e) {
+                                this.openPopup();
+                            });
+                            layer.on('mouseout', function(e) {
+                                this.closePopup();
+                            });
                         }
                     }).addTo($scope.mymap)
 
@@ -58,23 +64,39 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
             })
     });
 
+
     function getColor(d) {
-        return d > 30000 ? '#ff6347' :
-            d > 20000 ? '#f86e47' :
-            d > 10000 ? '#f17947' :
-            d > 5000 ? '#eb8447' :
-            d > 4500 ? '#e48f47' :
-            d > 4000 ? '#de9a47' :
-            d > 3750 ? '#d7a547' :
-            d > 3500 ? '#d1b147' :
-            d > 3250 ? '#cabc47' :
-            d > 2000 ? '#c3c747' :
-            d > 2500 ? '#bdd247' :
-            d > 2000 ? '#b6dd47' :
-            d > 1500 ? '#b0e847' :
-            d > 1250 ? '#a9f347' :
-            d > 1000 ? '#a3ff47' :
-            '#ffffff';
+        var colors = ['#ffffe0', '#fff6cf', '#ffedbf', '#ffe5b2', '#ffdca5', '#ffd399', '#ffc98f', '#ffbf86', '#ffb57e', '#ffac77', '#ffa072', '#ff956d', '#fd8c69', '#fa8266', '#f67863', '#f26f60', '#ed655d', '#e85b59', '#e35256', '#dd4852', '#d7404e', '#d03649', '#c92e43', '#c1253d', '#b91c35', '#b1142d', '#a80c25', '#9e051b', '#960110', '#8b0000']
+        return d > 30000 ? colors[29] :
+            d > 25000 ? colors[28] :
+            d > 20000 ? colors[27] :
+            d > 19000 ? colors[26] :
+            d > 18000 ? colors[25] :
+            d > 16000 ? colors[24] :
+            d > 15000 ? colors[23] :
+            d > 14000 ? colors[22] :
+            d > 13000 ? colors[21] :
+            d > 12500 ? colors[20] :
+            d > 12000 ? colors[19] :
+            d > 11500 ? colors[18] :
+            d > 11000 ? colors[17] :
+            d > 10500 ? colors[16] :
+            d > 10000 ? colors[15] :
+            d > 9500 ? colors[14] :
+            d > 9000 ? colors[13] :
+            d > 8500 ? colors[12] :
+            d > 8000 ? colors[11] :
+            d > 7000 ? colors[10] :
+            d > 6000 ? colors[9] :
+            d > 5000 ? colors[8] :
+            d > 4000 ? colors[7] :
+            d > 3000 ? colors[6] :
+            d > 2000 ? colors[5] :
+            d > 1000 ? colors[4] :
+            d > 750 ? colors[3] :
+            d > 500 ? colors[2] :
+            d > 100 ? colors[1]:
+            colors[0]
     }
 
     $scope.getYear = getYear;
@@ -111,6 +133,12 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
                         },
                         onEachFeature: function(feature, layer) {
                             layer.bindPopup('<b>Country: </b>' + files.country + '</br><b>Year: </b>' + files.year + '</br> <b>Total Suicides: </b> ' + files.suicides_no);
+                            layer.on('mouseover', function(e) {
+                                this.openPopup();
+                            });
+                            layer.on('mouseout', function(e) {
+                                this.closePopup();
+                            });
                         }
                     }).addTo($scope.mymap)
 
@@ -152,6 +180,12 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
                         },
                         onEachFeature: function(feature, layer) {
                             layer.bindPopup('<b>Country: </b>' + files.country + '</br><b>Year: </b>' + files.year + '</br> <b>Total Suicides: </b> ' + files.suicides_no);
+                            layer.on('mouseover', function(e) {
+                                this.openPopup();
+                            });
+                            layer.on('mouseout', function(e) {
+                                this.closePopup();
+                            });
                         }
                     }).addTo($scope.mymap)
 
@@ -168,7 +202,7 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
         yearTimer($scope.start)
         if ($scope.start == 2013)
             $scope.start = 1984
-        else 
+        else
             $scope.start = $scope.start + 1
     }, 1500);
 
@@ -176,11 +210,30 @@ angular.module('gisApp').controller('IndexController', function($scope, $rootSco
         $scope.lb = document.getElementById("loopBtn");
         if ($scope.lb.value == "Stop Loop") {
             $interval.cancel(interval)
-            $scope.lb.style.visibility="hidden"
+            $scope.lb.style.visibility = "hidden"
             var sel = document.getElementById("yearList");
             sel.value = $scope.start;
 
-        } 
+        }
+    }
+
+    $scope.regionSelect = function () {
+        var sel = document.getElementById("regionSelect");
+        var value = sel.options[sel.selectedIndex].value;
+
+        if(value == "North America"){
+            $scope.mymap.setView([48.166666 ,-100.166666], 4);
+        } else if(value == "South America"){
+            $scope.mymap.setView([-30.206283, -57.849463],4);
+        } else if(value == "Asia"){
+            $scope.mymap.setView([41.890515, 91.530142],3);
+        } else if(value == "Europe"){
+            $scope.mymap.setView([49.213900, 13.118821],4);
+        } else if(value == "Africa"){
+            $scope.mymap.setView([-2.751046, 22.534352],4);
+        } else if(value =="Australia"){
+            $scope.mymap.setView([-30.389241, 134.307407],5);
+        }
     }
 
 });

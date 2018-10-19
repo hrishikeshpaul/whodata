@@ -1,4 +1,4 @@
-
+  <span style="font-size: 25px;font-weight: 40;">Select Year: </span>
 </br>
     <select id="yearList" style="width: 100%; height: 5vh;" >
         <option value="1985">1985</option>
@@ -33,5 +33,22 @@
     </select>
   </br>
 </br>
-    <button class="btn btn-lg" ng-click="getYear(1985)" style="margin-left: 20px;">Select</button>
+    <button class="btn btn-lg" ng-click="getYear()" >Select</button>
+
+</br>
+</br>
+  <span style="font-size: 25px;font-weight: 40;">Select Region: </span>
+</br>
+    <select id="regionSelect" style="width: 100%; height: 5vh;" >
+        <option value="North America">North America</option>
+        <option value="South America">South America</option>
+        <option value="Europe">Europe</option>
+        <option value="Australia">Australia</option>
+        <option value="Africa">Africa</option>
+        <option value="Asia">Asia</option>
+    </select>
+  </br>
+</br>
+    <button class="btn btn-lg" ng-click="regionSelect()" >Select</button>
+
 
