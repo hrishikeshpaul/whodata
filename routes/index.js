@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var MobileActivity = require('../models/mobile_activity')
 var Suicides = require('../models/suicides')
 var GeoData = require('./countries.geo.json')
 var allYears = require('./allyears.js')
